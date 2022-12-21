@@ -1,47 +1,64 @@
 <template>
-  <div >
-    <v-row>
-      <v-col ><h1>Make your url shorter</h1></v-col>
-      
-    </v-row>
-    <v-row>
-      <v-col><hr></v-col>
-    </v-row>
-    <v-form>
-      <v-container class="ma-4">
-        <v-row>
-          <v-col cols="12">
-            <v-text-field
-              v-model="userUrl"
-              outlined
-              clearable
-              label="Enter your long url"
-              type="text"
-              ><template v-slot:append-outer>
-                <v-btn @click="apiCall(userUrl)"> convert </v-btn>
-              </template>
-            </v-text-field>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-form>
-    <v-form>
-      <v-container class="ma-4">
-        <v-row>
-          <v-col cols="12">
-            <v-text-field
-              v-model="shorterUrl"
-              outlined
-              type="text"
-              placeholder="Your Short URL"
-              />
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-form>
+  <div class="mainDiv">
+    <div class="header">
+      <img class="mainImage" src="../assets/images/shortUrl.png" alt="" />
+    </div>
+    <section class="white sec mx-auto pa-6">
+      <div>
+        <h1><b>Paste the URL to be shortened</b></h1>
+      </div>
+      <div>
+        <v-form>
+          <v-container class="ma-4">
+            <div>
+              <div cols="12">
+                <v-text-field
+                  v-model="userUrl"
+                  outlined
+                  clearable
+                  label="Enter your long url"
+                  type="text"
+                >
+                </v-text-field>
+              </div>
+              <div>
+                <v-btn class="con-btn info" @click="apiCall(userUrl)">
+                  convert
+                </v-btn>
+              </div>
+              <div class="ma-4">
+                <b
+                  >ShortURL.at is a free tool to shorten a URL or reduce a link
+                  Use our URL Shortener to create a shortened link making it
+                  easy to remember
+                </b>
+              </div>
+            </div>
+          </v-container>
+        </v-form>
+      </div>
+    </section>
 
-   
-    
+    <section class="white ma-4 sec mx-auto pa-6">
+      <div>
+        <h1><b>Short URL</b></h1>
+      </div>
+      <v-form>
+        <v-container class="ma-4">
+          <div>
+            <div cols="12">
+              <v-text-field
+                v-model="shorterUrl"
+                outlined
+                type="text"
+                placeholder="Your Short URL"
+              />
+            </div>
+          </div>
+          <div><b>Long URL: </b>{{ this.userUrl }}</div>
+        </v-container>
+      </v-form>
+    </section>
   </div>
 </template>
 
@@ -49,9 +66,7 @@
 export default {
   name: "HelloWorld",
 
-  data: () => ({ userUrl: "",
-  shorterUrl:''
- }),
+  data: () => ({ userUrl: "", shorterUrl: "" }),
   methods: {
     apiCall(userUrl) {
       const url = new URL("https://t.ly/api/v1/link/shorten");
@@ -75,12 +90,26 @@ export default {
         method: "POST",
         headers,
         body: JSON.stringify(body),
-      }).then((response) => response.json().then((data)=>{
-        console.log(data.short_url);
-        this.shorterUrl=data.short_url;
-      }));
+      }).then((response) =>
+        response.json().then((data) => {
+          console.log(data.short_url);
+          this.shorterUrl = data.short_url;
+        })
+      );
     },
   },
 };
 </script>
 <!-- FE5qNilsGxXqNaoOe2h0Iduz6kP1Bj4765AMqHHlKFbPLteG2DCtDutIHYoa -->
+<style scoped>
+.mainDiv {
+  height: 100vh;
+  background-color: #f9f9f9;
+}
+.mainImage {
+  width: 250px;
+}
+.sec {
+  width: 50%;
+}
+</style>
