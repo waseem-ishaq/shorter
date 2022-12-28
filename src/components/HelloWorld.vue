@@ -1,7 +1,7 @@
 <template>
   <div class="mainDiv">
-    <div class="header">
-      <img class="mainImage" src="../assets/images/shortUrl.png" alt="" />
+    <div class="header text-center">
+      <img width="250px" src="../assets/images/shortUrl.png" alt="" />
     </div>
     <section class="white sec mx-auto pa-6">
       <div>
@@ -106,9 +106,7 @@ export default {
   height: 100vh;
   background-color: #f9f9f9;
 }
-.mainImage {
-  width: 250px;
-}
+
 .sec {
   width: 50%;
 }
